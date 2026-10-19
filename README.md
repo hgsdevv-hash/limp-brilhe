@@ -11,7 +11,8 @@ Limpbrilhe/
 ├── css/style.css   # visual (cores no topo, em :root)
 ├── js/main.js      # abertura com o rodinho, janela que limpa com o dedo, antes/depois, menu
 ├── assets/img/     # logo (versão redesenhada, trocar pela oficial)
-└── assets/video/   # 5 reels do Instagram (em parceria com @compact.limp, uso autorizado)
+└── assets/video/   # 5 reels do Instagram (em parceria com @compact.limp, uso autorizado):
+                    #   *-preview.mp4 = 8 s sem som nos cards, *.mp4 = completo no player, *.jpg = capa
 ```
 
 ## Interações
@@ -32,6 +33,5 @@ Para ver a abertura de novo, feche a aba ou abra em janela anônima.
 - Número de WhatsApp em `js/main.js` (`WHATSAPP`). Enquanto estiver vazio, os botões abrem o Direct do Instagram
 - Logo oficial em alta resolução em `assets/img/`
 - Fotos reais de antes e depois (hoje é uma ilustração)
-- Comprimir os vídeos (hoje somam 51 MB; o de 65 s tem 20 MB)
 - Confirmar a descrição dos serviços e as respostas das dúvidas
 - Cidade e região de atendimento
