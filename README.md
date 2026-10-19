@@ -9,8 +9,8 @@ remoção de marca d'água e impermeabilização de vidros. Instagram: @limp_bri
 Limpbrilhe/
 ├── index.html      # a página inteira
 ├── css/style.css   # visual (cores no topo, em :root)
-├── js/main.js      # abertura com o rodinho, janela que limpa com o dedo, antes/depois, menu
-├── assets/img/     # logo (versão redesenhada, trocar pela oficial)
+├── js/main.js      # abertura com o rodinho, janela que limpa com o dedo, vídeos, menu
+├── assets/img/     # logo (versão redesenhada, trocar pela oficial) e foto do topo (tirada de um vídeo)
 └── assets/video/   # 5 reels do Instagram (em parceria com @compact.limp, uso autorizado):
                     #   *-preview.mp4 = 8 s sem som nos cards, *.mp4 = completo no player, *.jpg = capa
 ```
@@ -18,20 +18,24 @@ Limpbrilhe/
 ## Interações
 
 - Abertura: a tela começa embaçada e um rodinho limpa tudo na técnica do "S" (uma vez por visita, com botão "Pular")
-- Janela embaçada no topo: o visitante passa o dedo ou o mouse para limpar o vidro
+- Janela embaçada no topo: o visitante passa o dedo ou o mouse e aparece a foto de um serviço real
 - Trabalhos reais: 5 vídeos verticais. No computador rodam ao passar o mouse, no celular roda só o que está na tela; ao tocar, abrem em tela cheia com som
-- Antes e depois com barra de arrastar
-- Bolhas de sabão subindo no topo e reflexo de brilho nos cards e botões
 
 ## Como abrir
 
 Abra o `index.html` no navegador. Não precisa instalar nada.
 Para ver a abertura de novo, feche a aba ou abra em janela anônima.
 
+## Visual
+
+O site evita os padrões que deixam páginas com cara de feitas por IA: selo acima do título,
+rótulos em caixa alta, texto com degradê, cards iguais com ícone, passos numerados, brilhos,
+vidro desfocado, bolhas decorativas e frases genéricas. Textos sem termos técnicos.
+
+WhatsApp: (19) 99170-5557 (em `js/main.js`, `WHATSAPP`)
+
 ## Pendências (marcadas com TODO no código)
 
-- Número de WhatsApp em `js/main.js` (`WHATSAPP`). Enquanto estiver vazio, os botões abrem o Direct do Instagram
 - Logo oficial em alta resolução em `assets/img/`
-- Fotos reais de antes e depois (hoje é uma ilustração)
 - Confirmar a descrição dos serviços e as respostas das dúvidas
 - Cidade e região de atendimento

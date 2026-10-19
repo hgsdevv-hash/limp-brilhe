@@ -2,9 +2,9 @@
 // Limp Brilhe | interações da landing page
 // =========================================================
 
-// TODO: colocar o WhatsApp do cliente (só números, com 55 e DDD). Vazio = os botões abrem o Direct do Instagram.
-const WHATSAPP = "";
-const MSG = "Olá! Vim pelo site e gostaria de agendar um orçamento.";
+// WhatsApp da equipe (só números, com 55 e DDD)
+const WHATSAPP = "5519991705557";
+const MSG = "Olá! Vim pelo site e gostaria de um orçamento.";
 
 const root = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -19,6 +19,13 @@ document.querySelectorAll("[data-contact]").forEach((link) => {
   link.href = contactUrl;
   link.target = "_blank";
   link.rel = "noopener";
+});
+
+// ---------- Logo: volta para o topo da página ----------
+document.getElementById("brand").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  history.replaceState(null, "", location.pathname + location.search);
 });
 
 // ---------- Menu do celular ----------
@@ -193,8 +200,7 @@ if (!introOn) {
     stopped = true;
     ctx.clearRect(0, 0, W, H);
     sq.style.opacity = "0";
-    intro.classList.add("shine");
-    setTimeout(finishIntro, 650);
+    finishIntro();
   }
 
   document.getElementById("introSkip").addEventListener("click", () => { stopped = true; finishIntro(); });
@@ -213,7 +219,6 @@ const pane = document.getElementById("pane");
 const paneFog = document.getElementById("paneFog");
 const paneStatus = document.getElementById("paneStatus");
 const paneClean = document.getElementById("paneClean");
-const paneDone = document.getElementById("paneDone");
 let fog;
 
 function resetPane() {
@@ -224,16 +229,14 @@ function resetPane() {
   fog.ctx.lineJoin = "round";
   fog.ctx.lineWidth = Math.max(40, fog.w * 0.11);
   pane.classList.remove("clean", "touched");
-  paneDone.classList.remove("out");
   paneStatus.textContent = "Vidro embaçado";
   paneClean.textContent = "Limpar tudo";
 }
 
 function setClean() {
   pane.classList.add("clean", "touched");
-  paneStatus.textContent = "Vidro limpo e brilhando";
+  paneStatus.textContent = "Vidro limpo";
   paneClean.textContent = "Embaçar de novo";
-  setTimeout(() => paneDone.classList.add("out"), 2400);
 }
 
 // confere quanto do vidro já foi limpo (amostra pixels, sem pesar)
@@ -282,7 +285,7 @@ window.addEventListener("resize", () => {
   resizeTimer = setTimeout(() => { if (!pane.classList.contains("clean")) resetPane(); }, 200);
 });
 
-// ---------- Trabalhos reais: vídeos que rodam sem som e abrem com som ----------
+// ---------- Trabalhos: vídeos que rodam sem som e abrem com som ----------
 const reelsList = document.getElementById("reels");
 const reelVideos = [...reelsList.querySelectorAll("video")];
 const canHover = window.matchMedia("(hover: hover)").matches;
@@ -337,24 +340,3 @@ reelsList.querySelectorAll(".reel-btn").forEach((btn) =>
 document.getElementById("playerClose").addEventListener("click", () => player.close());
 player.addEventListener("click", (e) => { if (e.target === player) player.close(); });   // clique fora do vídeo
 player.addEventListener("close", () => { playerVideo.pause(); playerVideo.removeAttribute("src"); playerVideo.load(); });
-
-// ---------- Antes e depois ----------
-const ba = document.getElementById("ba");
-document.getElementById("baRange").addEventListener("input", (e) => ba.style.setProperty("--pos", `${e.target.value}%`));
-
-// ---------- Entrada em cascata ao rolar ----------
-const revealEls = document.querySelectorAll("[data-reveal]");
-revealEls.forEach((el) => {
-  const siblings = [...el.parentElement.children].filter((c) => c.hasAttribute("data-reveal"));
-  el.style.setProperty("--d", `${siblings.indexOf(el) * 0.08}s`);
-});
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add("visible");
-    observer.unobserve(entry.target);
-  });
-}, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-revealEls.forEach((el) => observer.observe(el));
-
-if (reduceMotion) revealEls.forEach((el) => el.classList.add("visible"));
