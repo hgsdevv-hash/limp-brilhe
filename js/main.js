@@ -2,8 +2,8 @@
 // Limp Brilhe | interações da landing page
 // =========================================================
 
-// WhatsApp da equipe (só números, com 55 e DDD)
-const WHATSAPP = "5519991705557";
+// TODO: colocar o WhatsApp certo (só números, com 55 e DDD). Vazio = os botões abrem o Direct do Instagram.
+const WHATSAPP = "";
 const MSG = "Olá! Vim pelo site e gostaria de um orçamento.";
 
 const root = document.documentElement;
@@ -200,7 +200,8 @@ if (!introOn) {
     stopped = true;
     ctx.clearRect(0, 0, W, H);
     sq.style.opacity = "0";
-    finishIntro();
+    intro.classList.add("shine");
+    setTimeout(finishIntro, 650);
   }
 
   document.getElementById("introSkip").addEventListener("click", () => { stopped = true; finishIntro(); });
@@ -219,6 +220,7 @@ const pane = document.getElementById("pane");
 const paneFog = document.getElementById("paneFog");
 const paneStatus = document.getElementById("paneStatus");
 const paneClean = document.getElementById("paneClean");
+const paneDone = document.getElementById("paneDone");
 let fog;
 
 function resetPane() {
@@ -229,6 +231,7 @@ function resetPane() {
   fog.ctx.lineJoin = "round";
   fog.ctx.lineWidth = Math.max(40, fog.w * 0.11);
   pane.classList.remove("clean", "touched");
+  paneDone.classList.remove("out");
   paneStatus.textContent = "Vidro embaçado";
   paneClean.textContent = "Limpar tudo";
 }
@@ -237,6 +240,7 @@ function setClean() {
   pane.classList.add("clean", "touched");
   paneStatus.textContent = "Vidro limpo";
   paneClean.textContent = "Embaçar de novo";
+  setTimeout(() => paneDone.classList.add("out"), 2400);
 }
 
 // confere quanto do vidro já foi limpo (amostra pixels, sem pesar)
@@ -340,3 +344,19 @@ reelsList.querySelectorAll(".reel-btn").forEach((btn) =>
 document.getElementById("playerClose").addEventListener("click", () => player.close());
 player.addEventListener("click", (e) => { if (e.target === player) player.close(); });   // clique fora do vídeo
 player.addEventListener("close", () => { playerVideo.pause(); playerVideo.removeAttribute("src"); playerVideo.load(); });
+
+// ---------- Entrada em cascata ao rolar ----------
+const revealEls = document.querySelectorAll("[data-reveal]");
+revealEls.forEach((el) => {
+  const siblings = [...el.parentElement.children].filter((c) => c.hasAttribute("data-reveal"));
+  el.style.setProperty("--d", `${siblings.indexOf(el) * 0.08}s`);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("visible");
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+revealEls.forEach((el) => observer.observe(el));
+if (reduceMotion) revealEls.forEach((el) => el.classList.add("visible"));

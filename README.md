@@ -28,13 +28,12 @@ Para ver a abertura de novo, feche a aba ou abra em janela anônima.
 
 ## Visual
 
-O site evita os padrões que deixam páginas com cara de feitas por IA: selo acima do título,
-rótulos em caixa alta, texto com degradê, cards iguais com ícone, passos numerados, brilhos,
-vidro desfocado, bolhas decorativas e frases genéricas. Textos sem termos técnicos.
-
-WhatsApp: (19) 99170-5557 (em `js/main.js`, `WHATSAPP`)
+Mistura de animação com sobriedade: sem selo acima do título, sem rótulos em caixa alta,
+sem texto com degradê e sem vidro desfocado. Foto real no topo e textos sem termos técnicos.
 
 ## Pendências (marcadas com TODO no código)
+
+- WhatsApp certo em `js/main.js` (`WHATSAPP`). Enquanto estiver vazio, os botões abrem o Direct do Instagram
 
 - Logo oficial em alta resolução em `assets/img/`
 - Confirmar a descrição dos serviços e as respostas das dúvidas
