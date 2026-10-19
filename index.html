@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limp Brilhe | Limpeza de vidros, lustres e pós-obra</title>
+  <meta name="description" content="Limpeza de vidros, lustres, pedrarias e pós-obra. Remoção de marca d'água e impermeabilização de vidros. Agende seu orçamento com a Limp Brilhe.">
+  <meta name="theme-color" content="#25235a">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:title" content="Limp Brilhe | Limpeza de vidros, lustres e pós-obra">
+  <meta property="og:description" content="Vidros, lustres e pedrarias brilhando de verdade. Agende seu orçamento.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
+  <script>
+    (function () {
+      var h = document.documentElement;
+      try {
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("intro-vista")) {
+          h.classList.add("js-intro");
+          // a abertura sempre começa no topo da página
+          if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+          sessionStorage.setItem("intro-vista", "1");
+        }
+      } catch (e) { /* sem sessionStorage: segue sem abertura */ }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ===== Abertura: um rodinho passa pela tela embaçada e deixa tudo limpo ===== -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <canvas class="intro-fog" id="introFog"></canvas>
+    <svg class="squeegee" id="squeegee" viewBox="0 0 110 300">
+      <defs>
+        <linearGradient id="sqMetal" x1="0" x2="1">
+          <stop offset="0" stop-color="#9aa6b8"/><stop offset=".5" stop-color="#eef2f7"/><stop offset="1" stop-color="#8793a6"/>
+        </linearGradient>
+        <linearGradient id="sqGrip" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff35a"/><stop offset="1" stop-color="#d9c700"/>
+        </linearGradient>
+      </defs>
+      <!-- cabo -->
+      <rect x="2" y="132" width="62" height="36" rx="18" fill="url(#sqGrip)"/>
+      <rect x="10" y="140" width="40" height="4" rx="2" fill="#fff" opacity=".55"/>
+      <rect x="58" y="141" width="30" height="18" rx="4" fill="url(#sqMetal)"/>
+      <!-- canaleta de metal -->
+      <rect x="84" y="2" width="16" height="296" rx="5" fill="url(#sqMetal)"/>
+      <rect x="86" y="146" width="12" height="8" rx="2" fill="#5c677a"/>
+      <!-- borracha -->
+      <rect x="99" y="6" width="8" height="288" rx="3" fill="#1b1c2a"/>
+      <rect x="106" y="6" width="3" height="288" rx="1.5" fill="#bfe9f5" opacity=".8"/>
+    </svg>
+    <div class="intro-shine"></div>
+    <button class="intro-skip" id="introSkip" type="button">Pular</button>
+  </div>
+
+  <!-- ===== Navegação ===== -->
+  <header class="nav" id="topo">
+    <div class="wrap nav-inner">
+      <a href="#topo" class="brand" aria-label="Limp Brilhe, início">
+        <img src="assets/img/logo.svg" alt="" width="44" height="44">
+        <span>Limp Brilhe</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Seções">
+        <a href="#servicos">Serviços</a>
+        <a href="#antes-depois">Antes e depois</a>
+        <a href="#como">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="btn btn-sm btn-primary nav-cta" data-contact href="#contato">Agendar orçamento</a>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuMobile" aria-label="Abrir menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
+      <a href="#servicos">Serviços</a>
+      <a href="#antes-depois">Antes e depois</a>
+      <a href="#como">Como funciona</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <span class="bubble" style="--x: 8%;  --s: 18px; --t: 9s;  --w: 0s"   aria-hidden="true"></span>
+      <span class="bubble" style="--x: 22%; --s: 10px; --t: 7s;  --w: 2s"   aria-hidden="true"></span>
+      <span class="bubble" style="--x: 46%; --s: 14px; --t: 11s; --w: 4s"   aria-hidden="true"></span>
+      <span class="bubble" style="--x: 64%; --s: 8px;  --t: 8s;  --w: 1s"   aria-hidden="true"></span>
+      <span class="bubble" style="--x: 88%; --s: 20px; --t: 12s; --w: 3s"   aria-hidden="true"></span>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="spark" aria-hidden="true"></span> Limpeza profissional de vidros</p>
+          <h1>Vidro limpo é aquele que <em>parece que não está lá.</em></h1>
+          <p class="hero-lead">
+            Limpeza de vidros, lustres, pedrarias e pós-obra, com acabamento sem marcas.
+            Em casas, apartamentos, lojas e empresas.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-contact href="#contato">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>
+              Agendar orçamento
+            </a>
+            <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
+          </div>
+          <a class="hero-ig" href="https://www.instagram.com/limp_brilhe/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="dot"/></svg>
+            <span><strong>@limp_brilhe</strong> no Instagram</span>
+          </a>
+        </div>
+
+        <!-- Janela embaçada: o visitante passa o dedo para limpar -->
+        <div class="pane-wrap">
+          <div class="pane" id="pane">
+            <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#scene"/></svg>
+            <canvas class="pane-fog" id="paneFog" aria-hidden="true"></canvas>
+            <div class="pane-glint" aria-hidden="true"></div>
+            <span class="pane-hint" id="paneHint" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 11V5a2 2 0 0 1 4 0v5l4.4.9a2 2 0 0 1 1.6 2.3L18 19a3 3 0 0 1-3 2h-3.5a3 3 0 0 1-2.4-1.2L5.5 15a1.6 1.6 0 0 1 2.4-2.1z"/></svg>
+              Passe o dedo para limpar
+            </span>
+            <span class="pane-done" id="paneDone" aria-hidden="true">Brilhando!</span>
+          </div>
+          <div class="pane-bar">
+            <span id="paneStatus" aria-live="polite">Vidro embaçado</span>
+            <button class="pane-reset" id="paneClean" type="button">Limpar tudo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Serviços ===== -->
+    <section class="section" id="servicos">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Serviços</p>
+          <h2>Do vidro da janela ao cristal do lustre</h2>
+          <p>Cada superfície pede o produto e a técnica certos. A gente cuida disso.</p>
+        </header>
+
+        <!-- TODO: confirmar com o cliente a descrição de cada serviço -->
+        <div class="services">
+          <article class="service service-feature" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><rect x="8" y="6" width="32" height="36" rx="2"/><path d="M24 6v36M8 24h32"/><path class="ic-shine" d="M13 18l5-5M13 13l2-2"/></svg>
+            </span>
+            <h3>Limpeza de vidros</h3>
+            <p>Janelas, fachadas, sacadas, box, espelhos e divisórias. Sem manchas, sem marca de pano.</p>
+          </article>
+
+          <article class="service" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M24 4v8"/><path d="M10 18h28l-4 8H14z"/><g class="ic-swing"><path d="M14 26v6M24 26v10M34 26v6"/><path d="M14 32l-2 3 2 3 2-3zM24 36l-2 3 2 3 2-3zM34 32l-2 3 2 3 2-3z"/></g><path d="M18 12h12l-2 6h-8z"/></svg>
+            </span>
+            <h3>Lustres</h3>
+            <p>Limpeza peça por peça de lustres de cristal e luminárias, devolvendo o brilho da luz.</p>
+          </article>
+
+          <article class="service" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M14 8h20l8 10-18 24L6 18z"/><path d="M6 18h36M18 8l-4 10 10 24 10-24-4-10"/><path class="ic-shine" d="M38 4v6M35 7h6"/></svg>
+            </span>
+            <h3>Pedrarias</h3>
+            <p>Mármores, granitos e pedras decorativas limpos com cuidado, sem agredir o acabamento.</p>
+          </article>
+
+          <article class="service" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M8 30a16 16 0 0 1 32 0z"/><path d="M6 30h36v5H6z"/><path d="M24 14v-4M20 14l1-4h6l1 4"/><path class="ic-dust" d="M12 42h2M22 43h2M32 42h2"/></svg>
+            </span>
+            <h3>Pós-obra</h3>
+            <p>Remoção de pó fino, respingos de tinta, cimento e cola. A obra acaba e o lugar fica pronto para morar.</p>
+          </article>
+
+          <article class="service" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path class="ic-drop" d="M24 6c6 9 10 15 10 21a10 10 0 0 1-20 0c0-6 4-12 10-21z"/><path d="M19 28a5 5 0 0 0 5 5"/><path d="M8 42l32-32"/></svg>
+            </span>
+            <h3>Remoção de marca d'água</h3>
+            <p>Tira aquelas manchas brancas de calcário que a água deixa no box e nos vidros externos.</p>
+          </article>
+
+          <article class="service" data-reveal>
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 10-7 17-16 22C15 39 8 32 8 22V10z"/><path class="ic-drop" d="M24 15c3 4 5 7 5 10a5 5 0 0 1-10 0c0-3 2-6 5-10z"/></svg>
+            </span>
+            <h3>Impermeabilização de vidros</h3>
+            <p>Uma camada que faz a água escorrer e deixa o vidro limpo por mais tempo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Antes e depois ===== -->
+    <section class="section section-tint" id="antes-depois">
+      <div class="wrap ba-grid">
+        <div class="ba-copy" data-reveal>
+          <p class="kicker">Antes e depois</p>
+          <h2>A diferença aparece na primeira olhada</h2>
+          <p>Arraste a barra para ver como fica o vidro depois de uma limpeza bem feita.</p>
+          <!-- TODO: trocar a ilustração por fotos reais de antes e depois do Instagram -->
+          <a class="btn btn-outline" href="https://www.instagram.com/limp_brilhe/" target="_blank" rel="noopener">Ver trabalhos reais no Instagram</a>
+        </div>
+
+        <div class="ba" id="ba" style="--pos: 50%" data-reveal>
+          <div class="ba-layer ba-after">
+            <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#scene"/></svg>
+            <span class="ba-tag ba-tag-r">Depois</span>
+          </div>
+          <div class="ba-layer ba-before">
+            <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#scene"/></svg>
+            <svg class="dirt" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><use href="#dirt"/></svg>
+            <span class="ba-tag">Antes</span>
+          </div>
+          <div class="ba-handle" aria-hidden="true"><span></span></div>
+          <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Como funciona ===== -->
+    <section class="section" id="como">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Como funciona</p>
+          <h2>Três passos até o brilho</h2>
+        </header>
+        <ol class="steps">
+          <li data-reveal>
+            <h3>Você manda uma mensagem</h3>
+            <p>Conte o que precisa limpar. Fotos do local ajudam a calcular mais rápido.</p>
+          </li>
+          <li data-reveal>
+            <h3>Recebe o orçamento</h3>
+            <p>Você sabe o valor antes de qualquer serviço e escolhe o melhor dia.</p>
+          </li>
+          <li data-reveal>
+            <h3>A gente deixa brilhando</h3>
+            <p>Limpeza feita com os produtos certos para cada superfície, e local entregue organizado.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Para quem ===== -->
+    <section class="section section-dark">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Atendimento</p>
+          <h2>Para todo tipo de espaço</h2>
+        </header>
+        <ul class="places">
+          <li data-reveal><strong>Casas</strong><span>Janelas, box, espelhos e sacadas</span></li>
+          <li data-reveal><strong>Apartamentos</strong><span>Vidros, guarda-corpos e lustres</span></li>
+          <li data-reveal><strong>Lojas e vitrines</strong><span>Vitrine limpa vende mais</span></li>
+          <li data-reveal><strong>Empresas</strong><span>Fachadas, divisórias e recepções</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Dúvidas frequentes ===== -->
+    <section class="section" id="duvidas">
+      <div class="wrap faq-wrap">
+        <header class="section-head">
+          <p class="kicker">Dúvidas</p>
+          <h2>Perguntas frequentes</h2>
+        </header>
+        <!-- TODO: revisar as respostas com o cliente -->
+        <div class="faq">
+          <details>
+            <summary>Como faço para agendar?</summary>
+            <p>Mande uma mensagem com o tipo de serviço e, se puder, fotos do local. Você recebe o orçamento e escolhe a data.</p>
+          </details>
+          <details>
+            <summary>Vocês limpam vidros por fora, em altura?</summary>
+            <p>Conte como é o local na mensagem. A gente avalia o acesso e explica o que é possível fazer com segurança.</p>
+          </details>
+          <details>
+            <summary>A marca d'água sai mesmo?</summary>
+            <p>Na maioria dos casos, sim. As manchas de calcário saem com produto e técnica próprios para isso, sem riscar o vidro.</p>
+          </details>
+          <details>
+            <summary>Quanto tempo dura a impermeabilização?</summary>
+            <p>Depende de quanto o vidro pega chuva e de como é limpo no dia a dia. Explicamos tudo no orçamento.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contato ===== -->
+    <section class="contact" id="contato">
+      <div class="wrap contact-card" data-reveal>
+        <div>
+          <h2>Seu vidro merece brilhar de novo</h2>
+          <p>Agende seu orçamento. A resposta chega direto na sua mensagem.</p>
+        </div>
+        <div class="contact-actions">
+          <!-- TODO: colocar o número de WhatsApp do cliente em js/main.js (WHATSAPP) -->
+          <a class="btn btn-primary btn-lg" data-contact href="https://ig.me/m/limp_brilhe" target="_blank" rel="noopener">Agendar orçamento</a>
+          <a class="btn btn-light" href="https://www.instagram.com/limp_brilhe/" target="_blank" rel="noopener">Seguir no Instagram</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© <span id="year"></span> Limp Brilhe. Limpeza de vidros, lustres e pós-obra.</p>
+      <a href="https://www.instagram.com/limp_brilhe/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </footer>
+
+  <!-- Barra fixa no celular -->
+  <div class="mobile-bar">
+    <a class="mb-main" data-contact href="https://ig.me/m/limp_brilhe" target="_blank" rel="noopener">Agendar orçamento</a>
+    <a class="mb-ig" href="https://www.instagram.com/limp_brilhe/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+    </a>
+  </div>
+
+  <!-- Ilustrações reutilizadas: a paisagem vista pela janela e a sujeira do "antes" -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5fb8f0"/><stop offset=".65" stop-color="#bfe6fb"/><stop offset="1" stop-color="#e9f7ff"/>
+      </linearGradient>
+      <linearGradient id="hillA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3ec7a8"/><stop offset="1" stop-color="#1f9c86"/></linearGradient>
+      <linearGradient id="hillB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fdcb8"/><stop offset="1" stop-color="#49b897"/></linearGradient>
+      <radialGradient id="sunGlow"><stop offset="0" stop-color="#fff7a8"/><stop offset=".5" stop-color="#ffe95c" stop-opacity=".55"/><stop offset="1" stop-color="#ffe95c" stop-opacity="0"/></radialGradient>
+    </defs>
+    <symbol id="scene" viewBox="0 0 400 300">
+      <rect width="400" height="300" fill="url(#sky)"/>
+      <circle cx="300" cy="80" r="70" fill="url(#sunGlow)"/>
+      <circle cx="300" cy="80" r="26" fill="#ffe24a"/>
+      <g fill="#fff" opacity=".95">
+        <path d="M60 80a16 16 0 0 1 30-6 12 12 0 0 1 20 10H54a8 8 0 0 1 6-4z"/>
+        <path d="M200 50a12 12 0 0 1 22-4 9 9 0 0 1 15 8h-40a6 6 0 0 1 3-4z"/>
+      </g>
+      <g fill="#2b3a7a" opacity=".85">
+        <rect x="40" y="150" width="34" height="90"/><rect x="80" y="122" width="28" height="118"/>
+        <rect x="114" y="160" width="40" height="80"/><rect x="250" y="140" width="30" height="100"/>
+        <rect x="286" y="168" width="44" height="72"/><rect x="336" y="130" width="26" height="110"/>
+      </g>
+      <g fill="#ffe86b" opacity=".85">
+        <rect x="86" y="132" width="5" height="6"/><rect x="97" y="132" width="5" height="6"/><rect x="86" y="148" width="5" height="6"/>
+        <rect x="256" y="152" width="5" height="6"/><rect x="268" y="166" width="5" height="6"/><rect x="342" y="144" width="5" height="6"/><rect x="342" y="160" width="5" height="6"/>
+      </g>
+      <path d="M0 230c60-30 120-34 200-14s140 10 200-12v96H0z" fill="url(#hillB)"/>
+      <path d="M0 256c80-22 150-18 220 0s130 12 180-4v48H0z" fill="url(#hillA)"/>
+    </symbol>
+    <symbol id="dirt" viewBox="0 0 400 300">
+      <rect width="400" height="300" fill="#b6a27a" opacity=".38"/>
+      <g fill="#8a7650" opacity=".35">
+        <circle cx="60" cy="60" r="34"/><circle cx="150" cy="200" r="46"/><circle cx="320" cy="230" r="40"/>
+        <circle cx="260" cy="70" r="24"/><circle cx="90" cy="250" r="20"/>
+      </g>
+      <g fill="none" stroke="#f5f1e6" stroke-width="2.5" opacity=".7">
+        <circle cx="110" cy="110" r="9"/><circle cx="130" cy="96" r="5"/><circle cx="210" cy="150" r="11"/>
+        <circle cx="300" cy="130" r="7"/><circle cx="340" cy="60" r="10"/><circle cx="60" cy="170" r="6"/>
+        <circle cx="240" cy="250" r="8"/><circle cx="180" cy="60" r="6"/>
+      </g>
+      <g stroke="#ffffff" stroke-width="3" opacity=".35" stroke-linecap="round">
+        <path d="M40 20c10 40 4 70 12 110M330 10c-6 40 0 70-6 120M200 0c4 30-2 60 4 90"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <script src="js/main.js?v=1"></script>
+</body>
+</html>

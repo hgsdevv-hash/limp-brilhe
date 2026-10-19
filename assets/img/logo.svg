@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- TODO: trocar pela logo oficial em alta resolução -->
+  <circle cx="50" cy="50" r="48" fill="#25235a"/>
+  <circle cx="50" cy="50" r="42" fill="none" stroke="#f2e205" stroke-width="5"/>
+  <path d="M50 70c-4-3-6-6-6-9 3 1 5 2 6 4 1-2 3-3 6-4 0 3-2 6-6 9zm0 0c-2-4-2-8 0-12 2 4 2 8 0 12z" fill="#2ec4c4"/>
+  <text x="50" y="47" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="19" fill="#fff">LIMP</text>
+  <text x="50" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10.5" letter-spacing="1" fill="#fff">BRILHE</text>
+</svg>
